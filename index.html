@@ -188,7 +188,7 @@
 		const cidrListText = $('#ipranges').val();
 		const cidrList = cidrListText.split('\n').filter(line => line.trim() !== '');
 		const ipList = generateIPList(cidrList);
-		if (detectConfigType(inputConfig) == 'unknown' || cidrList.length == 0) 
+		if (detectConfigType(inputConfig) === 'unknown' || cidrList.length === 0) 
 		{alert("No/bad config/range!\nEnter valid config/range.");return;}
 		let results = new Array(count);
 		for(let i = 0; i < count; i++) {
@@ -198,14 +198,16 @@
 		}
 		resultTextarea.value = results.join('');
 	}
-	 function copyToClipboard() {
-            const copyText = document.getElementById("result");
-			if (copyText.trim() !== ''){
-				copyText.select();
-				document.execCommand("copy");
-				alert("Copied the result!");
-			}
-     }
+    function copyToClipboard() {
+        const copyText = document.getElementById("result");
+        if (copyText.value.length !== 0) {
+            copyText.select();
+            document.execCommand("copy");
+            alert("Copied the result!");
+        } else {
+            alert("Result is empty!");
+        }
+    }
 	</script>
 </body>
 
