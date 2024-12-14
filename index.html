@@ -194,13 +194,14 @@
             return [start, start + max - 1];
         }
 
-        function generateAllIPsFromCIDR(cidr) {
+        function getRandomIPFromCIDR(cidr, usedIPs) {
             const [start, end] = cidrToRange(cidr);
-            const ips = [];
-            for (let ip = start; ip <= end; ip++) {
-                ips.push(convertIPToString(ip));
-            }
-            return ips;
+            let randomIP;
+            do {
+                randomIP = Math.floor(Math.random() * (end - start + 1)) + start;
+            } while (usedIPs.has(convertIPToString(randomIP)));
+            usedIPs.add(convertIPToString(randomIP));
+            return convertIPToString(randomIP);
         }
 
         function convertIPToString(ip) {
@@ -224,20 +225,13 @@
                 return;
             }
 
-            let allIPs = [];
-            cidrList.forEach(cidr => {
-                allIPs = allIPs.concat(generateAllIPsFromCIDR(cidr));
-            });
-
-            // Shuffle the IPs array
-            for (let i = allIPs.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [allIPs[i], allIPs[j]] = [allIPs[j], allIPs[i]];
+            let results = [];
+            let usedIPs = new Set(); // To track unique IPs
+            for (let i = 0; i < count; i++) {
+                const randomCIDR = cidrList[Math.floor(Math.random() * cidrList.length)];
+                results.push(replaceIPInConfig(inputConfig, getRandomIPFromCIDR(randomCIDR, usedIPs)));
             }
-
-            // Pick unique IPs
-            const uniqueIPs = allIPs.slice(0, count).map(ip => replaceIPInConfig(inputConfig, ip));
-            resultTextarea.value = uniqueIPs.join('');
+            resultTextarea.value = results.join('');
         }
 
         function copyToClipboard() {
