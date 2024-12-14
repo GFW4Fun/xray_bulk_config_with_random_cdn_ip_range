@@ -2,127 +2,129 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Random Config</title>
-	<style>
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Config</title>
+    <style>
+        /* General link styles */
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
 
-	a:hover {
-		color: #ffffff;
-		text-decoration: underline;
-	}
+        a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
 
-	a:visited {
-		color: #ffffff;
-	}
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+            margin: 50px auto;
+            font-family: 'Arial', sans-serif;
+        }
 
-	a:active {
-		color: #ffffff;
-	}
+        .container {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin: auto;
+        }
 
-	a:focus {
-		outline: 2px solid #007bff;
-	}
+        textarea {
+            margin-top: 20px;
+            width: 100%;
+            height: 400px;
+            font-size: 16px;
+            resize: none;
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-y: auto;
+        }
 
-	body {
-		background-color: #121212;
-		color: #ffffff;
-		text-align: center;
-		margin-top: 50px;
-		font-family: Arial, sans-serif;
-	}
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
 
-	.container {
-		background-color: #1e1e1e;
-		border-radius: 10px;
-		padding: 30px;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-		max-width: 800px;
-		margin: auto;
-	}
+        textarea::-webkit-scrollbar-track {
+            background: #1e1e1e;
+            border-radius: 5px;
+        }
 
-	textarea {
-		margin-top: 20px;
-		width: 100%;
-		height: 400px;
-		font-size: 16px;
-		resize: none;
-		background-color: #2a2a2a;
-		color: #ffffff;
-		border: none;
-		border-radius: 5px;
-		padding: 10px;
-		overflow-y: auto;
-	}
+        textarea::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 5px;
+        }
 
-	textarea::-webkit-scrollbar {
-		width: 8px;
-	}
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: #0056b3;
+        }
 
-	textarea::-webkit-scrollbar-track {
-		background: #1e1e1e;
-		border-radius: 5px;
-	}
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-	textarea::-webkit-scrollbar-thumb {
-		background: #007bff;
-		border-radius: 5px;
-	}
+        button:hover {
+            background-color: #0056b3;
+        }
 
-	textarea::-webkit-scrollbar-thumb:hover {
-		background: #0056b3;
-	}
+        .form-group input,
+        .form-group input:focus {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2a2a2a;
+            color: #ffffff;
+        }
 
-	button {
-		margin-top: 10px;
-		padding: 10px 20px;
-		font-size: 16px;
-		color: #ffffff;
-		background-color: #007bff;
-		border: none;
-		border-radius: 5px;
-		cursor: pointer;
-	}
+        .form-label {
+            margin-top: 20px;
+            display: block;
+            font-weight: bold;
+        }
 
-	button:hover {
-		background-color: #0056b3;
-	}
+        .form-range {
+            margin-top: 20px;
+            width: 100%;
+        }
 
-	.form-group input,
-	.form-group input:focus {
-		width: 100%;
-		padding: 10px;
-		font-size: 16px;
-		border: none;
-		border-radius: 5px;
-		background-color: #2a2a2a;
-		color: #ffffff;
-	}
+        hr {
+            border: 1px solid #444;
+            margin: 20px 0;
+        }
 
-	.form-label {
-		margin-top: 20px;
-	}
-
-	.form-range {
-		margin-top: 20px;
-		width: 100%;
-	}
-	</style>
+        h1,
+        h3 {
+            color: #007bff;
+        }
+    </style>
 </head>
 
 <body>
-	<div class="container">
-		<h1 class="mb-4"><a href="https://github.com/GFW4Fun/xray_bulk_config_with_random_cdn_ip_range">🔗Bulk Config With Random IP Range</a></h1>
-		<div class="form-group">
-			<input type="text" id="inputConfig" placeholder="Enter a config of vless/vmess/trojan/wireguard here..." />
-		</div>
-		<br />
-		<label for="ipranges" class="form-label mt-3">CIDR IP Ranges (Default Cloudflare Range):</label>
-		<textarea id="ipranges" placeholder="Enter CIDR ranges here...">173.245.48.0/20
+    <div class="container">
+        <h1 class="mb-4"><a href="https://github.com/GFW4Fun/xray_bulk_config_with_random_cdn_ip_range">🔗Bulk Config With Random IP Range</a></h1>
+        <div class="form-group">
+            <input type="text" id="inputConfig" placeholder="Enter a config of vless/vmess/trojan/wireguard here..." />
+        </div>
+        <label for="ipranges" class="form-label">CIDR IP Ranges (Default Cloudflare Range):</label>
+        <textarea id="ipranges" placeholder="Enter CIDR ranges here...">173.245.48.0/20
 103.21.244.0/22
 103.22.200.0/22
 103.31.4.0/22
@@ -137,131 +139,125 @@
 104.24.0.0/14
 172.64.0.0/13
 131.0.72.0/22</textarea>
-		<textarea id="result" placeholder="Result..." readonly></textarea>
-		<input type="range" class="form-range" min="10" max="1000000" step="1" id="outputCount" value="1000" oninput="updateOutputCountValue()">
-		<button id="generateButton" onclick="pickRandomIPs()">⚙️Generate Random Config (1000)</button>
-		<button id="copyToClipboard" onclick="copyToClipboard()">📋Copy Result to Clipboard</button>
-		<br> <br>
-		<hr>
-		<h3 class="mb-4">Paste > V2rayN > Ctrl+A > Ctrl+R > Sort by result!</h3>
-	</div>
-	<script>
-	function updateOutputCountValue() {
-		const count = document.getElementById('outputCount').value;
-		document.getElementById('generateButton').innerText = `⚙️Generate Random Config (${count})`;
-	}
+        <textarea id="result" placeholder="Result..." readonly></textarea>
+        <input type="range" class="form-range" min="10" max="1000000" step="1" id="outputCount" value="2000" oninput="updateOutputCountValue()">
+        <button id="generateButton" onclick="pickRandomIPs()">⚙️Generate Random Config (2000)</button>
+        <button id="copyToClipboard" onclick="copyToClipboard()">📋Copy Result to Clipboard</button>
+        <hr>
+        <h3 class="mb-4">Paste > V2rayN > Ctrl+A > Ctrl+R > Sort by result!</h3>
+    </div>
+    <script>
+        function updateOutputCountValue() {
+            const count = document.getElementById('outputCount').value;
+            document.getElementById('generateButton').innerText = `⚙️Generate Random Config (${count})`;
+        }
 
-	function detectConfigType(inputConfig) {
-		if(inputConfig.startsWith('vmess://')) return 'vmess';
-		if(inputConfig.startsWith('vless://')) return 'vless';
-		if(inputConfig.startsWith('wireguard://')) return 'wireguard';
-		if(inputConfig.startsWith('trojan://')) return 'trojan';
-		return 'unknown';
-	}
+        function detectConfigType(inputConfig) {
+            if (inputConfig.startsWith('vmess://')) return 'vmess';
+            if (inputConfig.startsWith('vless://')) return 'vless';
+            if (inputConfig.startsWith('wireguard://')) return 'wireguard';
+            if (inputConfig.startsWith('trojan://')) return 'trojan';
+            return 'unknown';
+        }
 
-	function replaceIPInConfig(inputConfig, ipOrAddress) {
-		const configType = detectConfigType(inputConfig);
-		const addressStr = ipOrAddress.toString();
-		let result = '';
-		const regexPatterns = {
-			vmess: /^vmess:\/\/(.*)/,
-			vless: /^(vless:\/\/[^@]+)@([^:]+)(:.+)$/,
-			wireguard: /^(wireguard:\/\/[^@]+@)[^:]+(:.+)$/,
-			trojan: /^(trojan:\/\/[^@]+@)[^:]+(:.+)$/
-		};
-		switch (configType) {
-			case 'vmess':
-				const vmessMatch = inputConfig.match(regexPatterns.vmess);
-				if(vmessMatch) {
-					const vmessConfig = JSON.parse(atob(vmessMatch[1]));
-					vmessConfig.add = addressStr;
-					result = `vmess://${btoa(JSON.stringify(vmessConfig))}\n\n`;
-				}
-				break;
-			case 'vless':
-				const vlessMatch = inputConfig.match(regexPatterns.vless);
-				if(vlessMatch) {
-					result = `${vlessMatch[1]}@${addressStr}${vlessMatch[3]}\n\n`;
-				}
-				break;
-			case 'wireguard':
-				const wireguardMatch = inputConfig.match(regexPatterns.wireguard);
-				if(wireguardMatch) {
-					result = `${wireguardMatch[1]}${addressStr}${wireguardMatch[2]}\n\n`;
-				}
-				break;
-			case 'trojan':
-				const trojanMatch = inputConfig.match(regexPatterns.trojan);
-				if(trojanMatch) {
-					result = `${trojanMatch[1]}${addressStr}${trojanMatch[2]}\n\n`;
-				}
-				break;
-			default:
-				result = inputConfig;
-				break;
-		}
-		return result;
-	}
+        function replaceIPInConfig(inputConfig, ipOrAddress) {
+            const configType = detectConfigType(inputConfig);
+            const addressStr = ipOrAddress.toString();
+            let result = '';
+            const regexPatterns = {
+                vmess: /^vmess:\/\/(.*)/,
+                vless: /^(vless:\/\/[^@]+)@([^:]+)(:.+)$/,
+                wireguard: /^(wireguard:\/\/[^@]+@)[^:]+(:.+)$/,
+                trojan: /^(trojan:\/\/[^@]+@)[^:]+(:.+)$/
+            };
+            switch (configType) {
+                case 'vmess':
+                    const vmessMatch = inputConfig.match(regexPatterns.vmess);
+                    if (vmessMatch) {
+                        const vmessConfig = JSON.parse(atob(vmessMatch[1]));
+                        vmessConfig.add = addressStr;
+                        result = `vmess://${btoa(JSON.stringify(vmessConfig))}\n\n`;
+                    }
+                    break;
+                case 'vless':
+                    const vlessMatch = inputConfig.match(regexPatterns.vless);
+                    if (vlessMatch) {
+                        result = `${vlessMatch[1]}@${addressStr}${vlessMatch[3]}\n\n`;
+                    }
+                    break;
+                case 'wireguard':
+                    const wireguardMatch = inputConfig.match(regexPatterns.wireguard);
+                    if (wireguardMatch) {
+                        result = `${wireguardMatch[1]}${addressStr}${wireguardMatch[2]}\n\n`;
+                    }
+                    break;
+                case 'trojan':
+                    const trojanMatch = inputConfig.match(regexPatterns.trojan);
+                    if (trojanMatch) {
+                        result = `${trojanMatch[1]}${addressStr}${trojanMatch[2]}\n\n`;
+                    }
+                    break;
+                default:
+                    result = inputConfig;
+                    break;
+            }
+            return result;
+        }
 
-	function cidrToRange(cidr) {
-		const [base, mask] = cidr.split('/');
-		const baseParts = base.split('.').map(Number);
-		const max = Math.pow(2, 32 - mask);
-		const start = (baseParts[0] << 24) | (baseParts[1] << 16) | (baseParts[2] << 8) | baseParts[3];
-		return [start, start + max - 1];
-	}
+        function cidrToRange(cidr) {
+            const [base, mask] = cidr.split('/');
+            const baseParts = base.split('.').map(Number);
+            const max = Math.pow(2, 32 - mask);
+            const start = (baseParts[0] << 24) | (baseParts[1] << 16) | (baseParts[2] << 8) | baseParts[3];
+            return [start, start + max - 1];
+        }
 
-	function generateIPList(cidrList) {
-		let ipList = [];
-		cidrList.forEach(cidr => {
-			const [start, end] = cidrToRange(cidr);
-			for(let ip = start; ip <= end; ip++) {
-				ipList.push(ip);
-			}
-		});
-		return ipList;
-	}
+        function getRandomIPFromCIDR(cidr) {
+            const [start, end] = cidrToRange(cidr);
+            const randomIP = Math.floor(Math.random() * (end - start + 1)) + start;
+            return convertIPToString(randomIP);
+        }
 
-	function convertIPToString(ip) {
-		return [
-			(ip >>> 24) & 255,
-			(ip >>> 16) & 255,
-			(ip >>> 8) & 255,
-			ip & 255
-		].join('.');
-	}
+        function convertIPToString(ip) {
+            return [
+                (ip >>> 24) & 255,
+                (ip >>> 16) & 255,
+                (ip >>> 8) & 255,
+                ip & 255
+            ].join('.');
+        }
 
-	function pickRandomIPs() {
-		const count = parseInt(document.getElementById('outputCount').value);
-		const resultTextarea = document.getElementById('result');
-		const inputConfig = document.getElementById('inputConfig').value;
-		const cidrListText = document.getElementById('ipranges').value;
-		const cidrList = cidrListText.split('\n').filter(line => line.trim() !== '');
-		const ipList = generateIPList(cidrList);
-		if(detectConfigType(inputConfig) === 'unknown' || cidrList.length === 0) {
-			alert("No/bad config/range!\nEnter valid config/range.");
-			return;
-		}
-		let results = new Array(count);
-		for(let i = 0; i < count; i++) {
-			const randomIndex = Math.floor(Math.random() * ipList.length);
-			const randomIP = ipList[randomIndex];
-			results[i] = replaceIPInConfig(inputConfig, convertIPToString(randomIP));
-		}
-		resultTextarea.value = results.join('');
-	}
+        function pickRandomIPs() {
+            const count = parseInt(document.getElementById('outputCount').value);
+            const resultTextarea = document.getElementById('result');
+            const inputConfig = document.getElementById('inputConfig').value;
+            const cidrListText = document.getElementById('ipranges').value;
+            const cidrList = cidrListText.split('\n').filter(line => line.trim() !== '');
 
-	function copyToClipboard() {
-		const copyText = document.getElementById("result");
-		if(copyText.value.length !== 0) {
-			copyText.select();
-			document.execCommand("copy");
-			alert("Copied the result!");
-		} else {
-			alert("Result is empty!");
-		}
-	}
-	</script>
+            if (detectConfigType(inputConfig) === 'unknown' || cidrList.length === 0) {
+                alert("No/bad config/range!\nEnter valid config/range.");
+                return;
+            }
+
+            let results = [];
+            for (let i = 0; i < count; i++) {
+                const randomCIDR = cidrList[Math.floor(Math.random() * cidrList.length)];
+                results.push(replaceIPInConfig(inputConfig, getRandomIPFromCIDR(randomCIDR)));
+            }
+            resultTextarea.value = results.join('');
+        }
+
+        function copyToClipboard() {
+            const copyText = document.getElementById("result");
+            if (copyText.value.length !== 0) {
+                copyText.select();
+                document.execCommand("copy");
+                alert("Copied the result!");
+            } else {
+                alert("Result is empty!");
+            }
+        }
+    </script>
 </body>
 
 </html>
