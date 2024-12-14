@@ -37,7 +37,7 @@
 
         textarea {
             margin-top: 20px;
-            width: 100%;
+            width: calc(100% - 20px); /* Adjusted width */
             height: 400px;
             font-size: 16px;
             resize: none;
@@ -47,6 +47,17 @@
             border-radius: 5px;
             padding: 10px;
             overflow-y: auto;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px); /* Adjusted width */
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2a2a2a;
+            color: #ffffff;
+            margin-top: 20px;
         }
 
         textarea::-webkit-scrollbar {
@@ -81,17 +92,6 @@
 
         button:hover {
             background-color: #0056b3;
-        }
-
-        .form-group input,
-        .form-group input:focus {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            background-color: #2a2a2a;
-            color: #ffffff;
         }
 
         .form-label {
