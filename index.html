@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +38,7 @@
 
         textarea {
             margin-top: 20px;
-            width: calc(100% - 20px);
+            width: calc(100% - 20px); /* Adjusted width */
             height: 400px;
             font-size: 16px;
             resize: none;
@@ -50,7 +51,7 @@
         }
 
         input[type="text"] {
-            width: calc(100% - 20px);
+            width: calc(100% - 20px); /* Adjusted width */
             padding: 10px;
             font-size: 16px;
             border: none;
@@ -58,6 +59,24 @@
             background-color: #2a2a2a;
             color: #ffffff;
             margin-top: 20px;
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background: #1e1e1e;
+            border-radius: 5px;
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 5px;
+        }
+
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: #0056b3;
         }
 
         button {
@@ -194,13 +213,9 @@
             return [start, start + max - 1];
         }
 
-        function getRandomIPFromCIDR(cidr, usedIPs) {
+        function getRandomIPFromCIDR(cidr) {
             const [start, end] = cidrToRange(cidr);
-            let randomIP;
-            do {
-                randomIP = Math.floor(Math.random() * (end - start + 1)) + start;
-            } while (usedIPs.has(convertIPToString(randomIP)));
-            usedIPs.add(convertIPToString(randomIP));
+            const randomIP = Math.floor(Math.random() * (end - start + 1)) + start;
             return convertIPToString(randomIP);
         }
 
@@ -226,10 +241,9 @@
             }
 
             let results = [];
-            let usedIPs = new Set(); // To track unique IPs
             for (let i = 0; i < count; i++) {
                 const randomCIDR = cidrList[Math.floor(Math.random() * cidrList.length)];
-                results.push(replaceIPInConfig(inputConfig, getRandomIPFromCIDR(randomCIDR, usedIPs)));
+                results.push(replaceIPInConfig(inputConfig, getRandomIPFromCIDR(randomCIDR)));
             }
             resultTextarea.value = results.join('');
         }
