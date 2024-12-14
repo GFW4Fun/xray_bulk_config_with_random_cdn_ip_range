@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -140,7 +141,7 @@
 172.64.0.0/13
 131.0.72.0/22</textarea>
         <textarea id="result" placeholder="Result..." readonly></textarea>
-        <input type="range" class="form-range" min="10" max="1000000" step="1" id="outputCount" value="2000" oninput="updateOutputCountValue()">
+        <input type="range" class="form-range" min="100" max="1000000" step="100" id="outputCount" value="2000" oninput="updateOutputCountValue()">
         <button id="generateButton" onclick="pickRandomIPs()">⚙️Generate Random Config (2000)</button>
         <button id="copyToClipboard" onclick="copyToClipboard()">📋Copy Result to Clipboard</button>
         <hr>
