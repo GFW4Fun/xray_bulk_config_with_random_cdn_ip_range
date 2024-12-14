@@ -228,25 +228,27 @@
             ].join('.');
         }
 
-        function pickRandomIPs() {
-            const count = parseInt(document.getElementById('outputCount').value);
-            const resultTextarea = document.getElementById('result');
-            const inputConfig = document.getElementById('inputConfig').value;
-            const cidrListText = document.getElementById('ipranges').value;
-            const cidrList = cidrListText.split('\n').filter(line => line.trim() !== '');
+	function pickRandomIPs() {
+		const count = parseInt(document.getElementById('outputCount').value);
+		const resultTextarea = document.getElementById('result');
+		const inputConfig = document.getElementById('inputConfig').value;
+		const cidrListText = document.getElementById('ipranges').value;
+		const cidrList = cidrListText.split('\n').filter(line => line.trim() !== '');
 
-            if (detectConfigType(inputConfig) === 'unknown' || cidrList.length === 0) {
-                alert("No/bad config/range!\nEnter valid config/range.");
-                return;
-            }
+		if (detectConfigType(inputConfig) === 'unknown' || cidrList.length === 0) {
+			alert("No/bad config/range!\nEnter valid config/range.");
+			return;
+		}
 
-            let results = [];
-            for (let i = 0; i < count; i++) {
-                const randomCIDR = cidrList[Math.floor(Math.random() * cidrList.length)];
-                results.push(replaceIPInConfig(inputConfig, getRandomIPFromCIDR(randomCIDR)));
-            }
-            resultTextarea.value = results.join('');
-        }
+		let results = new Set(); // Use a Set to store unique results
+		while (results.size < count) { // Keep generating until we have the desired count
+			const randomCIDR = cidrList[Math.floor(Math.random() * cidrList.length)];
+			const newIP = getRandomIPFromCIDR(randomCIDR);
+			results.add(replaceIPInConfig(inputConfig, newIP)); // Add the modified config to the Set
+		}
+		
+		resultTextarea.value = Array.from(results).join(''); // Convert Set back to array and join
+	}
 
         function copyToClipboard() {
             const copyText = document.getElementById("result");
