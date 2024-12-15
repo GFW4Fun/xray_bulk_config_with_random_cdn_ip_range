@@ -37,7 +37,7 @@
 
         textarea {
             margin-top: 20px;
-            width: calc(100% - 20px); /* Adjusted width */
+            width: calc(100% - 20px);
             height: 400px;
             font-size: 16px;
             resize: none;
@@ -50,7 +50,7 @@
         }
 
         input[type="text"] {
-            width: calc(100% - 20px); /* Adjusted width */
+            width: calc(100% - 20px);
             padding: 10px;
             font-size: 16px;
             border: none;
@@ -121,7 +121,7 @@
     <div class="container">
         <h1 class="mb-4"><a href="https://github.com/GFW4Fun/xray_bulk_config_with_random_cdn_ip_range">🔗Bulk Config With Random IP Range</a></h1>
         <div class="form-group">
-            <input type="text" id="inputConfig" placeholder="Enter a config of vless/vmess/trojan/wireguard here..." />
+            <input type="text" id="inputConfig" placeholder="Enter a config of vmess/ss/vless/trojan/wireguard here..." />
         </div>
         <label for="ipranges" class="form-label">CIDR IP Ranges (Default Cloudflare Range):</label>
         <textarea id="ipranges" placeholder="Enter CIDR ranges here...">173.245.48.0/20
@@ -147,6 +147,58 @@
         <h3 class="mb-4">Paste > V2rayN > Ctrl+A > Ctrl+R > Sort by result!</h3>
     </div>
     <script>
+		// Base64 encoding with UTF-8 support
+		function base64Encode(str) {
+			// Encode the string as UTF-8
+			const utf8String = unescape(encodeURIComponent(str));
+			const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+			let output = '';
+			let buffer = 0;
+			let bitsAccumulated = 0;
+
+			for (let i = 0; i < utf8String.length; i++) {
+				buffer = (buffer << 8) | utf8String.charCodeAt(i);
+				bitsAccumulated += 8;
+
+				while (bitsAccumulated >= 6) {
+					output += chars[(buffer >> (bitsAccumulated - 6)) & 0x3F];
+					bitsAccumulated -= 6;
+				}
+			}
+
+			if (bitsAccumulated > 0) {
+				output += chars[(buffer << (6 - bitsAccumulated)) & 0x3F];
+			}
+
+			while (output.length % 4) {
+				output += '=';
+			}
+
+			return output;
+		}
+
+		// Base64 decoding with UTF-8 support
+		function base64Decode(str) {
+			const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+			let output = '';
+			let buffer = 0;
+			let bitsAccumulated = 0;
+
+			for (let i = 0; i < str.length; i++) {
+				if (str[i] === '=') break;
+				buffer = (buffer << 6) | chars.indexOf(str[i]);
+				bitsAccumulated += 6;
+
+				while (bitsAccumulated >= 8) {
+					output += String.fromCharCode((buffer >> (bitsAccumulated - 8)) & 0xFF);
+					bitsAccumulated -= 8;
+				}
+			}
+
+			// Decode the UTF-8 string
+			return decodeURIComponent(escape(output));
+		}
+		
         function updateOutputCountValue() {
             const count = document.getElementById('outputCount').value;
             document.getElementById('generateButton').innerText = `⚙️Generate Random Config (${count})`;
@@ -154,6 +206,7 @@
 
         function detectConfigType(inputConfig) {
             if (inputConfig.startsWith('vmess://')) return 'vmess';
+            if (inputConfig.startsWith('ss://')) return 'ss';
             if (inputConfig.startsWith('vless://')) return 'vless';
             if (inputConfig.startsWith('wireguard://')) return 'wireguard';
             if (inputConfig.startsWith('trojan://')) return 'trojan';
@@ -166,6 +219,7 @@
             let result = '';
             const regexPatterns = {
                 vmess: /^vmess:\/\/(.*)/,
+                ss: /^(ss:\/\/[^@]+@)[^:]+(:.+)$/,
                 vless: /^(vless:\/\/[^@]+)@([^:]+)(:.+)$/,
                 wireguard: /^(wireguard:\/\/[^@]+@)[^:]+(:.+)$/,
                 trojan: /^(trojan:\/\/[^@]+@)[^:]+(:.+)$/
@@ -174,9 +228,15 @@
                 case 'vmess':
                     const vmessMatch = inputConfig.match(regexPatterns.vmess);
                     if (vmessMatch) {
-                        const vmessConfig = JSON.parse(atob(vmessMatch[1]));
-                        vmessConfig.add = addressStr;
-                        result = `vmess://${btoa(JSON.stringify(vmessConfig))}\n\n`;
+                        const vmessConfig = JSON.parse(base64Decode(vmessMatch[1])); // Decode base64
+                        vmessConfig.add = addressStr; // Replace IP address in "add"
+                        result = `vmess://${base64Encode(JSON.stringify(vmessConfig))}\n\n`; // Encode back to base64
+                    }
+                    break;
+                case 'ss':
+                    const ssMatch = inputConfig.match(regexPatterns.ss);
+                    if (ssMatch) {
+                        result = `${ssMatch[1]}${addressStr}${ssMatch[2]}\n\n`;
                     }
                     break;
                 case 'vless':
@@ -227,27 +287,27 @@
             ].join('.');
         }
 
-	function pickRandomIPs() {
-		const count = parseInt(document.getElementById('outputCount').value);
-		const resultTextarea = document.getElementById('result');
-		const inputConfig = document.getElementById('inputConfig').value;
-		const cidrListText = document.getElementById('ipranges').value;
-		const cidrList = cidrListText.split('\n').filter(line => line.trim() !== '');
+        function pickRandomIPs() {
+            const count = parseInt(document.getElementById('outputCount').value);
+            const resultTextarea = document.getElementById('result');
+            const inputConfig = document.getElementById('inputConfig').value;
+            const cidrListText = document.getElementById('ipranges').value;
+            const cidrList = cidrListText.split('\n').filter(line => line.trim() !== '');
 
-		if (detectConfigType(inputConfig) === 'unknown' || cidrList.length === 0) {
-			alert("No/bad config/range!\nEnter valid config/range.");
-			return;
-		}
+            if (detectConfigType(inputConfig) === 'unknown' || cidrList.length === 0) {
+                alert("No/bad config/range!\nEnter valid config/range.");
+                return;
+            }
 
-		let results = new Set(); // Use a Set to store unique results
-		while (results.size < count) { // Keep generating until we have the desired count
-			const randomCIDR = cidrList[Math.floor(Math.random() * cidrList.length)];
-			const newIP = getRandomIPFromCIDR(randomCIDR);
-			results.add(replaceIPInConfig(inputConfig, newIP)); // Add the modified config to the Set
-		}
-		
-		resultTextarea.value = Array.from(results).join(''); // Convert Set back to array and join
-	}
+            let results = new Set();
+            while (results.size < count) {
+                const randomCIDR = cidrList[Math.floor(Math.random() * cidrList.length)];
+                const newIP = getRandomIPFromCIDR(randomCIDR);
+                results.add(replaceIPInConfig(inputConfig, newIP));
+            }
+
+            resultTextarea.value = Array.from(results).join('');
+        }
 
         function copyToClipboard() {
             const copyText = document.getElementById("result");
