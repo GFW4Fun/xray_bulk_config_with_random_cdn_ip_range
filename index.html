@@ -1,129 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- v5.0.0 -->
+<!-- v6.0.0 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Config</title>
-    <style>
-        /* General link styles */
-        a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+<style>
+    /* Reset and Box Model */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
+    /* Root Variables */
+    :root {
+        --bg: #fff;
+        --text: #212121;
+        --header: #000;
+        --link: #3b73e6;
+        --code: #e6e6e6;
+        --border: #e8e8e8;
+        --input-bg: #f4f4f4;
+        --link-hover: #0056b3;
+    }
 
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            text-align: center;
-            margin: 50px auto;
-            font-family: 'Arial', sans-serif;
+    @media only screen and (prefers-color-scheme: dark) {
+        body:not([data-theme='light']) {
+            --bg: #1a1a1a;
+            --text: #f4f4f4;
+            --header: #f4f4f4;
+            --link: #7aaeff;
+            --code: #3b3b3b;
+            --border: #3b3b3b;
+            --input-bg: #2a2a2a;
         }
+    }
 
-        .container {
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
-            margin: auto;
-        }
+    [data-theme='dark'] {
+        --bg: #1a1a1a;
+        --text: #f4f4f4;
+        --header: #f4f4f4;
+        --link: #7aaeff;
+        --code: #3b3b3b;
+        --border: #3b3b3b;
+        --input-bg: #2a2a2a;
+    }
 
-        textarea {
-            margin-top: 20px;
-            width: calc(100% - 20px);
-            height: 400px;
-            font-size: 16px;
-            resize: none;
-            background-color: #2a2a2a;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            overflow-y: auto;
-        }
+    /* Body Styles */
+    body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        text-align: center;
+        margin: 50px auto;
+    }
 
-        input[type="text"] {
-            width: calc(100% - 20px);
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            background-color: #2a2a2a;
-            color: #ffffff;
-            margin-top: 20px;
-        }
+    /* Container */
+    .container {
+        background-color: var(--bg);
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        max-width: 800px;
+        margin: auto;
+    }
 
-        textarea::-webkit-scrollbar {
-            width: 8px;
-        }
+    /* Text Elements */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--header);
+        margin-bottom: 1rem;
+    }
 
-        textarea::-webkit-scrollbar-track {
-            background: #1e1e1e;
-            border-radius: 5px;
-        }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.6rem; }
+    h4 { font-size: 1.4rem; }
+    h5 { font-size: 1.2rem; }
+    h6 { font-size: 1rem; }
 
-        textarea::-webkit-scrollbar-thumb {
-            background: #007bff;
-            border-radius: 5px;
-        }
+    /* Links */
+    a {
+        color: var(--link);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
 
-        textarea::-webkit-scrollbar-thumb:hover {
-            background: #0056b3;
-        }
+    a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+    }
 
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #ffffff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    /* Form Elements */
+    input, textarea, select {
+        font-family: inherit;
+        background-color: var(--input-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        color: var(--text);
+        width: calc(100% - 20px);
+        transition: border-color 0.3s; /* Smooth transition for focus */
+    }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+    textarea {
+        height: 400px;
+        resize: none;
+        overflow-y: auto;
+    }
 
-        .form-label {
-            margin-top: 20px;
-            display: block;
-            font-weight: bold;
-        }
+    button, input[type="text"], input[type="password"], input[type="email"], textarea {
+        font-size: 0.9rem;
+    }
 
-        .form-range {
-            margin-top: 20px;
-            width: 100%;
-        }
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: var(--link);
+        box-shadow: 0 0 0 2px rgba(59, 115, 230, 0.1);
+    }
 
-        hr {
-            border: 1px solid #444;
-            margin: 20px 0;
-        }
+    button, [type='submit'], [type='button'], [type='reset'] {
+        font-family: inherit;
+        background-color: var(--link);
+        color: var(--bg);
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s; /* Added transform for button press effect */
+    }
 
-        h1,
-        h3 {
-            color: #007bff;
-        }
-    </style>
+    button:hover {
+        background-color: var(--link-hover);
+        transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    /* Miscellaneous */
+    hr {
+        border: 1px solid var(--border);
+        margin: 20px 0;
+    }
+
+    progress {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    /* Scrollbar Styles for Textarea */
+    textarea::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    textarea::-webkit-scrollbar-track {
+        background: var(--input-bg);
+        border-radius: 5px;
+    }
+
+    textarea::-webkit-scrollbar-thumb {
+        background: var(--link);
+        border-radius: 5px;
+    }
+
+    textarea::-webkit-scrollbar-thumb:hover {
+        background: var(--link-hover);
+    }
+
+    /* Utility Classes */
+    .small { font-size: 0.9rem; }
+    .text-right { text-align: right; }
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .padding { padding: 1rem; }
+
+    [hidden] {
+        display: none;
+    }
+</style>
 </head>
 
 <body>
     <div class="container">
-        <h1 class="mb-4"><a href="https://github.com/GFW4Fun/xray_bulk_config_with_random_cdn_ip_range">🔗Bulk Config With Random IP Range</a></h1>
-        <div class="form-group">
-            <input type="text" id="inputConfig" placeholder="Enter a config of vmess/ss/vless/trojan/wireguard here..." />
+        <h1><a href="https://github.com/GFW4Fun/xray_bulk_config_with_random_cdn_ip_range">🔗Bulk Config With Random IP Range</a></h1>
+        <div>
+            <input type="text" id="inputConfig" placeholder="Enter a config of warp/wireguard/vmess/vless/tuic/trojan/ss/ssr/hysteria/hy2..." />
         </div>
-        <label for="ipranges" class="form-label">CIDR IP Ranges (Default Cloudflare Range):</label>
+        <label>CIDR IP Ranges (Default Cloudflare Range):</label>
         <textarea id="ipranges" placeholder="Enter CIDR ranges here...">173.245.48.0/20
 103.21.244.0/22
 103.22.200.0/22
@@ -140,16 +204,15 @@
 172.64.0.0/13
 131.0.72.0/22</textarea>
         <textarea id="result" placeholder="Result..." readonly></textarea>
-        <input type="range" class="form-range" min="100" max="1000000" step="100" id="outputCount" value="2000" oninput="updateOutputCountValue()">
+        <input type="range" min="100" max="1000000" step="100" id="outputCount" value="2000" oninput="updateOutputCountValue()">
         <button id="generateButton" onclick="pickRandomIPs()">⚙️Generate Random Config (2000)</button>
         <button id="copyToClipboard" onclick="copyToClipboard()">📋Copy Result to Clipboard</button>
         <hr>
-        <h3 class="mb-4">Paste > V2rayN > Ctrl+A > Ctrl+R > Sort by result!</h3>
+        <h4>Paste > V2rayN > Ctrl+A > Ctrl+R > Sort by result!</h4>
     </div>
     <script>
 		// Base64 encoding with UTF-8 support
 		function base64Encode(str) {
-			// Encode the string as UTF-8
 			const utf8String = unescape(encodeURIComponent(str));
 			const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 			let output = '';
@@ -165,15 +228,8 @@
 					bitsAccumulated -= 6;
 				}
 			}
-
-			if (bitsAccumulated > 0) {
-				output += chars[(buffer << (6 - bitsAccumulated)) & 0x3F];
-			}
-
-			while (output.length % 4) {
-				output += '=';
-			}
-
+			if (bitsAccumulated > 0) {output += chars[(buffer << (6 - bitsAccumulated)) & 0x3F];}
+			while (output.length % 4) {output += '=';}
 			return output;
 		}
 
@@ -194,8 +250,6 @@
 					bitsAccumulated -= 8;
 				}
 			}
-
-			// Decode the UTF-8 string
 			return decodeURIComponent(escape(output));
 		}
 		
@@ -203,66 +257,105 @@
             const count = document.getElementById('outputCount').value;
             document.getElementById('generateButton').innerText = `⚙️Generate Random Config (${count})`;
         }
+		
+		// Update the detectConfigType function
+		function detectConfigType(inputConfig) {
+			const regex = /^(vmess|ss|vless|wireguard|trojan|tuic|hysteria|hy2|ssr|warp):\/\//;
+			const match = inputConfig.match(regex);
+			return match ? match[1] : 'unknown';
+		}
+		
+		// Update the replaceIPInConfig function
+		function replaceIPInConfig(inputConfig, ipOrAddress) {
+			const configType = detectConfigType(inputConfig);
+			const addressStr = ipOrAddress.toString();
+			let result = '';
+			
+			const regexPatterns = {
+				vmess: /^vmess:\/\/(.*)/,
+				ss: /^(ss:\/\/[^@]+@)[^:]+(:.+)$/,
+				vless: /^(vless:\/\/[^@]+)@([^:]+)(:.+)$/,
+				wireguard: /^(wireguard:\/\/[^@]+@)[^:]+(:.+)$/,
+				trojan: /^(trojan:\/\/[^@]+@)[^:]+(:.+)$/,
+				tuic: /^(tuic:\/\/[^@]+@)[^:]+(:.+)$/,
+				hysteria: /^(hysteria:\/\/)([^:]+):(\d+)(\?.*?)(#.*)?$/,
+				hy2: /^(hy2:\/\/[^@]+@)[^:]+(:.+)$/,
+				ssr: /^(ssr:\/\/)(.*)/,
+				warp: /^(warp:\/\/)([^:]+)(:\d+)(.*)/
+			};
 
-        function detectConfigType(inputConfig) {
-            if (inputConfig.startsWith('vmess://')) return 'vmess';
-            if (inputConfig.startsWith('ss://')) return 'ss';
-            if (inputConfig.startsWith('vless://')) return 'vless';
-            if (inputConfig.startsWith('wireguard://')) return 'wireguard';
-            if (inputConfig.startsWith('trojan://')) return 'trojan';
-            return 'unknown';
-        }
-
-        function replaceIPInConfig(inputConfig, ipOrAddress) {
-            const configType = detectConfigType(inputConfig);
-            const addressStr = ipOrAddress.toString();
-            let result = '';
-            const regexPatterns = {
-                vmess: /^vmess:\/\/(.*)/,
-                ss: /^(ss:\/\/[^@]+@)[^:]+(:.+)$/,
-                vless: /^(vless:\/\/[^@]+)@([^:]+)(:.+)$/,
-                wireguard: /^(wireguard:\/\/[^@]+@)[^:]+(:.+)$/,
-                trojan: /^(trojan:\/\/[^@]+@)[^:]+(:.+)$/
-            };
-            switch (configType) {
-                case 'vmess':
-                    const vmessMatch = inputConfig.match(regexPatterns.vmess);
-                    if (vmessMatch) {
-                        const vmessConfig = JSON.parse(base64Decode(vmessMatch[1])); // Decode base64
-                        vmessConfig.add = addressStr; // Replace IP address in "add"
-                        result = `vmess://${base64Encode(JSON.stringify(vmessConfig))}\n\n`; // Encode back to base64
-                    }
-                    break;
-                case 'ss':
-                    const ssMatch = inputConfig.match(regexPatterns.ss);
-                    if (ssMatch) {
-                        result = `${ssMatch[1]}${addressStr}${ssMatch[2]}\n\n`;
-                    }
-                    break;
-                case 'vless':
-                    const vlessMatch = inputConfig.match(regexPatterns.vless);
-                    if (vlessMatch) {
-                        result = `${vlessMatch[1]}@${addressStr}${vlessMatch[3]}\n\n`;
-                    }
-                    break;
-                case 'wireguard':
-                    const wireguardMatch = inputConfig.match(regexPatterns.wireguard);
-                    if (wireguardMatch) {
-                        result = `${wireguardMatch[1]}${addressStr}${wireguardMatch[2]}\n\n`;
-                    }
-                    break;
-                case 'trojan':
-                    const trojanMatch = inputConfig.match(regexPatterns.trojan);
-                    if (trojanMatch) {
-                        result = `${trojanMatch[1]}${addressStr}${trojanMatch[2]}\n\n`;
-                    }
-                    break;
-                default:
-                    result = inputConfig;
-                    break;
-            }
-            return result;
-        }
+			switch (configType) {
+				case 'vmess':
+					const vmessMatch = inputConfig.match(regexPatterns.vmess);
+					if (vmessMatch) {
+						const vmessConfig = JSON.parse(base64Decode(vmessMatch[1])); // Decode base64
+						vmessConfig.add = addressStr; // Replace IP address in "add"
+						result = `vmess://${base64Encode(JSON.stringify(vmessConfig))}\n\n`; // Encode back to base64
+					}
+					break;
+				case 'ss':
+					const ssMatch = inputConfig.match(regexPatterns.ss);
+					if (ssMatch) {
+						result = `${ssMatch[1]}${addressStr}${ssMatch[2]}\n\n`;
+					}
+					break;
+				case 'vless':
+					const vlessMatch = inputConfig.match(regexPatterns.vless);
+					if (vlessMatch) {
+						result = `${vlessMatch[1]}@${addressStr}${vlessMatch[3]}\n\n`;
+					}
+					break;
+				case 'wireguard':
+					const wireguardMatch = inputConfig.match(regexPatterns.wireguard);
+					if (wireguardMatch) {
+						result = `${wireguardMatch[1]}${addressStr}${wireguardMatch[2]}\n\n`;
+					}
+					break;
+				case 'trojan':
+					const trojanMatch = inputConfig.match(regexPatterns.trojan);
+					if (trojanMatch) {
+						result = `${trojanMatch[1]}${addressStr}${trojanMatch[2]}\n\n`;
+					}
+					break;
+				case 'tuic':
+					const tuicMatch = inputConfig.match(regexPatterns.tuic);
+					if (tuicMatch) {
+						result = `${tuicMatch[1]}${addressStr}${tuicMatch[2]}\n\n`;
+					}
+					break;
+				case 'hysteria':
+					const hysteriaMatch = inputConfig.match(regexPatterns.hysteria);
+					if (hysteriaMatch) {
+						result = `${hysteriaMatch[1]}${addressStr}:${hysteriaMatch[3]}${hysteriaMatch[4] || ''}${hysteriaMatch[5] || ''}\n\n`;
+					}
+					break;
+				case 'hy2':
+					const hy2Match = inputConfig.match(regexPatterns.hy2);
+					if (hy2Match) {
+						result = `${hy2Match[1]}${addressStr}${hy2Match[2]}\n\n`; 
+					}
+					break;
+				case 'ssr':
+					const ssrMatch = inputConfig.match(regexPatterns.ssr);
+					if (ssrMatch) {
+						const ssrConfig = base64Decode(ssrMatch[2]); // Decode base64
+						const ssrParts = ssrConfig.split(':');
+						ssrParts[0] = addressStr; // Replace IP address in first part
+						result = `ssr://${base64Encode(ssrParts.join(':'))}\n\n`; // Encode back to base64
+					}
+					break;
+				case 'warp':
+					const warpMatch = inputConfig.match(regexPatterns.warp);
+					if (warpMatch) {
+						result = `${warpMatch[1]}${addressStr}${warpMatch[3]}${warpMatch[4] || ''}\n\n`;
+					}
+					break;
+				default:
+					result = inputConfig;
+					break;
+			}
+			return result;
+		}
 
         function cidrToRange(cidr) {
             const [base, mask] = cidr.split('/');
@@ -290,7 +383,7 @@
         function pickRandomIPs() {
             const count = parseInt(document.getElementById('outputCount').value);
             const resultTextarea = document.getElementById('result');
-            const inputConfig = document.getElementById('inputConfig').value;
+            const inputConfig = document.getElementById('inputConfig').value.trim();
             const cidrListText = document.getElementById('ipranges').value;
             const cidrList = cidrListText.split('\n').filter(line => line.trim() !== '');
 
