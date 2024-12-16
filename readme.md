@@ -4,6 +4,7 @@ Xray xui vless vmess trojan wireguard bulk config generator with random cdn cidr
 [Live Random Config](https://gfw4fun.github.io/xray_bulk_config_with_random_cdn_ip_range/)
 
 ##
+[Cloudflare-IPv4-Ranges](https://www.cloudflare.com/ips-v4)
 
 [Cloud-IP-Ranges](https://github.com/femueller/cloud-ip-ranges)
 
